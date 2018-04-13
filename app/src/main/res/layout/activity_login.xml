@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gongyou.rongclouddemo.LoginActivity">
+    <LinearLayout
+        android:id="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="50dp"
+        android:orientation="horizontal"/>
+
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="你的手机号码"
+        android:inputType="phone"
+        android:text=""
+        android:textColorHint="#c8969696"
+        android:textSize="28px"/>
+    <EditText
+        android:id="@+id/etPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="填写密码"
+        android:inputType="textPassword"
+        android:text=""
+        android:textColorHint="#c8969696"
+        android:textSize="28px"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginBottom="30px"
+        android:layout_marginTop="30px"
+
+        android:enabled="true"
+        android:text="登录"
+
+        android:textSize="30px"/>
+</LinearLayout>
