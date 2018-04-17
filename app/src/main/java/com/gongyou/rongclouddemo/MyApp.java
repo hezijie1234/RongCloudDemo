@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.gongyou.rongclouddemo.network.ResponseInfoAPI;
+import com.gongyou.rongclouddemo.network.Retrofit2Manager;
+
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Message;
@@ -19,6 +22,11 @@ public class MyApp extends Application {
     public static int mStatusHeight = 0;
     private static Context context;
     private static Handler handler;
+    private static ResponseInfoAPI mResponseInfoAPI;
+
+    public static ResponseInfoAPI getmResponseInfoAPI() {
+        return mResponseInfoAPI;
+    }
 
     @Override
     public void onCreate() {
@@ -26,6 +34,7 @@ public class MyApp extends Application {
         RongIM.init(this);
         context = getApplicationContext();
         handler = new Handler();
+        mResponseInfoAPI = Retrofit2Manager.getInstance().create(ResponseInfoAPI.class);
         RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
             @Override
             public boolean onReceived(Message message, int i) {

@@ -143,4 +143,6 @@
 
     <color name="gary">#898989</color>
     <color name="press">#e8e8e8</color>
+
+    <color name="de_title_bg">#0195ff</color>
 </resources>

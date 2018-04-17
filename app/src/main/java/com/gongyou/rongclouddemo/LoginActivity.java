@@ -43,11 +43,10 @@ public class LoginActivity extends MVPBaseActivity<LoginView,LoginPresenter> imp
 
     @Override
     protected void initData() {
-//        String cacheToken = SpUtils.getString(this,"token","");
-//        if (!TextUtils.isEmpty(cacheToken)){
-//            connect(cacheToken);
-//
-//        }
+        String cacheToken = SpUtils.getString(this,"token","");
+        if (!TextUtils.isEmpty(cacheToken)){
+            connect(cacheToken);
+        }
     }
 
     @Override
