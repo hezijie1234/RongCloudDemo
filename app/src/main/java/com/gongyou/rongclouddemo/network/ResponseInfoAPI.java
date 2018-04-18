@@ -3,6 +3,7 @@ package com.gongyou.rongclouddemo.network;
 
 
 
+import com.gongyou.rongclouddemo.QuitGroupResponse;
 import com.gongyou.rongclouddemo.mvp.bean.ResponseInfo;
 import com.gongyou.rongclouddemo.mvp.bean.db.CreateGroupResponse;
 import com.gongyou.rongclouddemo.mvp.bean.db.GetGroupMemberResponse;
@@ -63,4 +64,12 @@ public interface ResponseInfoAPI {
     //得到七牛的token
     @GET("user/get_image_token")
     Observable<QiNiuTokenResponse> getQiNiuToken();
+
+    //用户自行退出群组
+    @POST("group/quit")
+    Observable<QuitGroupResponse> quitGroup(@Body RequestBody body);
+
+    //创建者解散群组
+    @POST("group/dismiss")
+    Observable<QuitGroupResponse> dissmissGroup(@Body RequestBody body);
 }

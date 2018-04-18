@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.gongyou.rongclouddemo.GroupDetailActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,4 +55,86 @@
         android:gravity="start"
         android:listSelector="@android:color/transparent"
         android:numColumns="4"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="消息免打扰"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <com.gongyou.rongclouddemo.switchbutton.SwitchButton
+            android:id="@+id/sw_group_notfaction"
+            style="@style/SwitchButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:kswAnimationDuration="300"
+            app:kswBackDrawable="@drawable/ios_back_drawable"
+            app:kswBackMeasureRatio="1.4"
+            app:kswThumbDrawable="@drawable/ios_thumb"
+            app:kswThumbMarginBottom="-8dp"
+            app:kswThumbMarginLeft="-5dp"
+            app:kswThumbMarginRight="-5dp"
+            app:kswThumbMarginTop="-2.5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/group_clean"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/btn_list_item_bg"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="清除聊天记录"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/group_quit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rs_select_btn_red"
+        android:text="删除并退出"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/group_dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rs_select_btn_red"
+        android:text="解散并退出"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:visibility="gone" />
 </LinearLayout>

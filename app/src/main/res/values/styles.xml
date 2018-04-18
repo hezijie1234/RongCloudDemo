@@ -30,5 +30,11 @@
     <style name="dialogFullscreen">
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="SwitchButtonStyle">
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
 
 </resources>
