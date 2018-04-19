@@ -51,19 +51,10 @@ public class MainActivity extends BaseActivity {
         //同步所有用户信息给融云的服务器。
         DBManager.getInstance().getAllUserInfo();
         fragmentManager = getSupportFragmentManager();
-
     }
 
     @Override
     protected void initView() {
-//        showLoading();
-        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-            @Override
-            public UserInfo getUserInfo(String s) {
-
-                return null;
-            }
-        }, true);
         registerBR();
         isDebug = getSharedPreferences("config", MODE_PRIVATE).getBoolean("isDebug", false);
         conversationList = initConversationList();

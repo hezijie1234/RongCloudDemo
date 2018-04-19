@@ -28,6 +28,7 @@ public class PinyinComparator implements Comparator<Friend> {
     public int compare(Friend o1, Friend o2) {
         if (o1.getLetters().equals("@")
                 || o2.getLetters().equals("#")) {
+            //返回值为负数 o1在前o2在后，返回值为正数则o1在后o2在前，为o则不变。
             return -1;
         } else if (o1.getLetters().equals("#")
                    || o2.getLetters().equals("@")) {

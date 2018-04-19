@@ -311,59 +311,13 @@ public class SelectFriendsActivity extends MVPBaseActivity<SelectFriendView,Sele
             } else {
                 viewHolder.tvLetter.setVisibility(View.GONE);
             }
-
-//            if (isStartPrivateChat) {
-//                viewHolder.isSelect.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        CheckBox cb = (CheckBox) v;
-//                        if (cb != null) {
-//                            if (cb.isChecked()) {
-//                                for (CheckBox c : checkBoxList) {
-//                                    c.setChecked(false);
-//                                }
-//                                checkBoxList.clear();
-//                                checkBoxList.add(cb);
-//                            } else {
-//                                checkBoxList.clear();
-//                            }
-//                        }
-//                    }
-//                });
-//                viewHolder.isSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        mCBFlag.put(position, viewHolder.isSelect.isChecked());
-//                    }
-//                });
-//            } else {
-
-
                 viewHolder.isSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mCBFlag.put(position, viewHolder.isSelect.isChecked());
-                        updateSelectedSizeView(mCBFlag);
-                        if (mSelectedFriend.contains(friend)) {
-                            int index = mSelectedFriend.indexOf(friend);
-                            if (index > -1) {
-//                                mSelectedFriendsLinearLayout.removeViewAt(index);
-                            }
-                            mSelectedFriend.remove(friend);
-                        } else {
-                            mSelectedFriend.add(friend);
-                            LinearLayout view = (LinearLayout) View.inflate(SelectFriendsActivity.this, R.layout.item_selected_friends, null);
-                            SelectableRoundedImageView asyncImageView = (SelectableRoundedImageView) view.findViewById(R.id.iv_selected_friends);
-//                            String portraitUri = SealUserInfoManager.getInstance().getPortraitUri(friend);
-//                            ImageLoader.getInstance().displayImage(portraitUri, asyncImageView);
-                            view.removeView(asyncImageView);
-//                            mSelectedFriendsLinearLayout.addView(asyncImageView);
-                        }
+
                     }
                 });
-
-            viewHolder.isSelect.setChecked(mCBFlag.get(position));
-
             if (TextUtils.isEmpty(adapterList.get(position).getDisplayName())) {
                 viewHolder.tvTitle.setText(adapterList.get(position).getName());
             } else {

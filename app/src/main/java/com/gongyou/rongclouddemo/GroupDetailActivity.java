@@ -40,6 +40,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.utilities.PromptPopupDialog;
 import io.rong.imlib.RongIMClient;
@@ -152,7 +153,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                                             });
                                         }
                                         BroadcastManager.getInstance(GroupDetailActivity.this).sendBroadcast(Constant.GROUP_LIST_UPDATE);
-                                        finish();
+                                        startActivity(new Intent(GroupDetailActivity.this,MainActivity.class));
                                     }
                                 }, new Action1<Throwable>() {
                                     @Override
@@ -235,7 +236,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                                             });
                                         }
                                         BroadcastManager.getInstance(GroupDetailActivity.this).sendBroadcast(Constant.GROUP_LIST_UPDATE);
-                                        finish();
+                                        startActivity(new Intent(GroupDetailActivity.this,MainActivity.class));
                                     }
                                 }, new Action1<Throwable>() {
                                     @Override
@@ -402,10 +403,10 @@ public class GroupDetailActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(portraitUri)){
                     portraitUri = RongGenerate.generateDefaultAvatar(name,bean.getUserId());
                 }
-//                ImageLoader.getInstance().displayImage(portraitUri, iv_avatar, MyApp.getOptions());
-                Glide.with(GroupDetailActivity.this)
-                        .load(Uri.parse(portraitUri))
-                        .into(iv_avatar);
+                ImageLoader.getInstance().displayImage(portraitUri, iv_avatar, MyApp.getOptions());
+//                Glide.with(GroupDetailActivity.this)
+//                        .load(Uri.parse(portraitUri))
+//                        .into(iv_avatar);
                 iv_avatar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

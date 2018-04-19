@@ -19,6 +19,8 @@ import java.util.List;
 
 import io.rong.calllib.RongCallClient;
 import io.rong.calllib.RongCallSession;
+import io.rong.imageloader.core.DisplayImageOptions;
+import io.rong.imageloader.core.display.FadeInBitmapDisplayer;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.model.GroupNotificationMessageData;
 import io.rong.imlib.RongIMClient;
@@ -38,7 +40,7 @@ public class MyApp extends Application {
     private static Context context;
     private static Handler handler;
     private static ResponseInfoAPI mResponseInfoAPI;
-
+    private static DisplayImageOptions options;
     public static ResponseInfoAPI getmResponseInfoAPI() {
         return mResponseInfoAPI;
     }
@@ -51,6 +53,21 @@ public class MyApp extends Application {
         handler = new Handler();
         mResponseInfoAPI = Retrofit2Manager.getInstance().create(ResponseInfoAPI.class);
 //        setOnReceiverListener();
+
+        if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
+            options = new DisplayImageOptions.Builder()
+                    .showImageForEmptyUri(com.gongyou.rongclouddemo.R.drawable.de_default_portrait)
+                    .showImageOnFail(com.gongyou.rongclouddemo.R.drawable.de_default_portrait)
+                    .showImageOnLoading(com.gongyou.rongclouddemo.R.drawable.de_default_portrait)
+                    .displayer(new FadeInBitmapDisplayer(300))
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .build();
+        }
+    }
+
+    public static DisplayImageOptions getOptions() {
+        return options;
     }
 
     private void setOnReceiverListener() {
