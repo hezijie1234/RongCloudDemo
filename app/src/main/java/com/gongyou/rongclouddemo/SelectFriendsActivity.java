@@ -327,11 +327,12 @@ public class SelectFriendsActivity extends MVPBaseActivity<SelectFriendView,Sele
             if (TextUtils.isEmpty(portrait)){
                 portrait = RongGenerate.generateDefaultAvatar(friend.getName(), friend.getUserId());
             }
-            Glide.with(SelectFriendsActivity.this)
-                    .load(Uri.parse(portrait))
-                    .centerCrop()
-                    .crossFade()
-                    .into(viewHolder.mImageView);
+            ImageLoader.getInstance().displayImage(portrait, viewHolder.mImageView, MyApp.getOptions());
+//            Glide.with(SelectFriendsActivity.this)
+//                    .load(Uri.parse(portrait))
+//                    .centerCrop()
+//                    .crossFade()
+//                    .into(viewHolder.mImageView);
             return convertView;
         }
 
