@@ -43,6 +43,7 @@ public class LoginActivity extends MVPBaseActivity<LoginView,LoginPresenter> imp
 
     @Override
     protected void initData() {
+        //从SharePreference中获取存取的token，免登录。
         String cacheToken = SpUtils.getString(this,"token","");
         if (!TextUtils.isEmpty(cacheToken)){
             connect(cacheToken);

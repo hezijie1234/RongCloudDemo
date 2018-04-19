@@ -24,6 +24,7 @@ import com.gongyou.rongclouddemo.utils.Constant;
 import com.gongyou.rongclouddemo.utils.PhotoUtils;
 import com.gongyou.rongclouddemo.utils.SpUtils;
 import com.gongyou.rongclouddemo.utils.rong.BroadcastManager;
+import com.gongyou.rongclouddemo.utils.rong.RongGenerate;
 import com.google.gson.Gson;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -42,6 +43,7 @@ import javax.security.auth.login.LoginException;
 import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Group;
 import okhttp3.RequestBody;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
@@ -99,8 +101,21 @@ public class CreateGroupActivity extends AppCompatActivity {
                             Log.e("111", "call:创建群组 " + createGroupResponse);
                             BroadcastManager.getInstance(CreateGroupActivity.this).sendBroadcast(REFRESH_GROUP_UI);
                             mGroupId = createGroupResponse.getResult().getId();
+                            RongIM.setGroupInfoProvider(new RongIM.GroupInfoProvider() {
+                                @Override
+                                public Group getGroupInfo(String s) {
+                                    //对比融云给的用户id和服务器的用户id
+                                    if (s.equals(mGroupId)){
+//                        Log.e("111", "getGroupInfo: " + s + groups.getUserId() + "头像：" + groups.getPortraitUri());
+                                        String name = groupEdit.getText().toString().trim();
+                                        String portrait = RongGenerate.generateDefaultAvatar(name,mGroupId);
+                                        return new Group(mGroupId,name,Uri.parse(portrait));
+                                    }
+                                    return null;
+                                }
+                            }, true);
                             RongIM.getInstance().startConversation(CreateGroupActivity.this, Conversation.ConversationType.GROUP, mGroupId, groupEdit.getText().toString().trim());
-
+                            finish();
                         }
                     }
                 }, new Action1<Throwable>() {

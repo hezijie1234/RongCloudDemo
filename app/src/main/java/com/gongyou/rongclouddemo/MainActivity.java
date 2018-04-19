@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity {
     private Fragment conversationList;
     //连接成功才加载会话列表。
     private boolean flag;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected int initLayoutId() {
@@ -46,8 +48,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        //同步所有用户信息
+        //同步所有用户信息给融云的服务器。
         DBManager.getInstance().getAllUserInfo();
+        fragmentManager = getSupportFragmentManager();
+
     }
 
     @Override
@@ -72,13 +76,14 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-//                if(flag){
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.add(R.id.list_container, conversationList);
-                    fragmentTransaction.commit();
+                    if (conversationList.isAdded()){
+                        if (conversationList.isHidden()){
+                            fragmentManager.beginTransaction().show(conversationList).commit();
+                        }
+                    }else {
+                        fragmentManager.beginTransaction().add(R.id.list_container, conversationList).commit();
 
-//                }
+                    }
             }
         });
         mCreateGroup.setOnClickListener(new View.OnClickListener() {

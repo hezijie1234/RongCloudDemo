@@ -40,13 +40,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.rong.imageloader.core.ImageLoader;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.utilities.PromptPopupDialog;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
-import io.rong.imlib.model.Group;
-import io.rong.imlib.model.UserInfo;
 import okhttp3.RequestBody;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
@@ -128,20 +125,29 @@ public class GroupDetailActivity extends AppCompatActivity {
                                                     RongIM.getInstance().clearMessages(Conversation.ConversationType.GROUP, fromConversationId, new RongIMClient.ResultCallback<Boolean>() {
                                                         @Override
                                                         public void onSuccess(Boolean aBoolean) {
-                                                            Log.e("111", "call: 融云解散群组成功。" );
-                                                            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, fromConversationId, null);
+                                                            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, fromConversationId, new RongIMClient.ResultCallback<Boolean>() {
+                                                                @Override
+                                                                public void onSuccess(Boolean aBoolean) {
+                                                                    Log.e("111", "removeConversation:onSuccess "  );
+                                                                }
+
+                                                                @Override
+                                                                public void onError(RongIMClient.ErrorCode errorCode) {
+                                                                    Log.e("111", "removeConversation:onError "  + errorCode );
+                                                                }
+                                                            });
                                                         }
 
                                                         @Override
                                                         public void onError(RongIMClient.ErrorCode errorCode) {
-
+                                                            Log.e("111", "clearMessages onError: " + errorCode );
                                                         }
                                                     });
                                                 }
 
                                                 @Override
                                                 public void onError(RongIMClient.ErrorCode errorCode) {
-
+                                                    Log.e("111", "getConversation onError: " + errorCode );
                                                 }
                                             });
                                         }
@@ -175,6 +181,20 @@ public class GroupDetailActivity extends AppCompatActivity {
                 DialogWithYesOrNoUtils.getInstance().showDialog(GroupDetailActivity.this, "确认退出群组", new DialogWithYesOrNoUtils.DialogCallBack() {
                     @Override
                     public void executeEvent() {
+                        if (group == null){
+                            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, fromConversationId, new RongIMClient.ResultCallback<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean aBoolean) {
+                                    Log.e("111", "group==null removeConversation:onSuccess "  );
+                                }
+
+                                @Override
+                                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                                }
+                            });
+                            return;
+                        }
                         MyApp.getmResponseInfoAPI().quitGroup(getRequestBody(new QuitGroupRequest(group.getUserId())))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -188,7 +208,17 @@ public class GroupDetailActivity extends AppCompatActivity {
                                                     RongIM.getInstance().clearMessages(Conversation.ConversationType.GROUP, fromConversationId, new RongIMClient.ResultCallback<Boolean>() {
                                                         @Override
                                                         public void onSuccess(Boolean aBoolean) {
-                                                            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, fromConversationId, null);
+                                                            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, fromConversationId, new RongIMClient.ResultCallback<Boolean>() {
+                                                                @Override
+                                                                public void onSuccess(Boolean aBoolean) {
+                                                                    Log.e("111", "quit removeConversation:onSuccess "  );
+                                                                }
+
+                                                                @Override
+                                                                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                                                                }
+                                                            });
                                                         }
 
                                                         @Override
@@ -257,6 +287,11 @@ public class GroupDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private RequestBody getRequestBody(Object obj) {
