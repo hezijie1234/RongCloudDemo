@@ -28,6 +28,7 @@ public class DemoGridView extends GridView {
     }
 
     /**
+     * 
      * @param widthMeasureSpec
      * @param heightMeasureSpec
      * 在自定义View和ViewGroup的时候，我们经常会遇到int型的MeasureSpec来表示一个组件的大小，这个变量里面不仅有组件的尺寸大小，还有大小的模式。
